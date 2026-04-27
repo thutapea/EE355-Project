@@ -1,103 +1,79 @@
 
 #include "contact.h"
-// TODO: Add needed libraries! 
 
-Email::Email(string type, string email_addr){
-    // TODO: Complete me!
-    this->type = type;
+// ─── Email ────────────────────────────────────────────────────────────────────
+
+Email::Email(string type, string email_addr) {
+    this->type       = type;
     this->email_addr = email_addr;
 }
 
-
-void Email::set_contact(){
-    // TODO: Do not change the prompts!
-	
+void Email::set_contact() {
     cout << "Enter the type of email address: ";
-    // some code here
     getline(cin, type);
     cout << "Enter email address: ";
-    // some code here
     getline(cin, email_addr);
 }
 
-
-string Email::get_contact(string style){
+string Email::get_contact(string style) {
     // Note: We have default argument in declaration and not in definition!
-    if (style=="full")
-	    return "(" + type + ") " + email_addr;
-    else 
+    if (style == "full")
+        return "(" + type + ") " + email_addr;
+    else
         return email_addr;
 }
 
-
-void Email::print(){
-    // Note: get_contact is called with default argument
-	cout << "Email" << get_contact() << endl;
+void Email::print() {
+    cout << "Email (" << type << "): " << email_addr << endl;
 }
 
 
-Phone::Phone(string type, string num){
-    // TODO: It is possible that num includes "-" or not, manage it!
-    // TODO: Complete this method!
+// ─── Phone ────────────────────────────────────────────────────────────────────
+
+static long parsePhoneNumber(const string& num) {
+    // Strip any non-digit characters (e.g. dashes) then convert to long
     // Note: We don't want to use C++11! stol is not valid!
-    this->type = type;
-
-    long long result = 0;
-    for (size_t i = 0; i < num.length(); ++i){
-        if (num[i] >= '0' && num[i] <= '9'){
-            result = result * 10 + (num[i] - '0');
-        }
+    string digits;
+    for (int i = 0; i < (int)num.size(); i++) {
+        if (num[i] >= '0' && num[i] <= '9')
+            digits += num[i];
     }
-
-
-
+    return atol(digits.c_str());
 }
 
+static string formatPhoneNumber(long n) {
+    // Format 10-digit number as "XXX-XXX-XXXX"
+    long area   = n / 10000000L;
+    long middle = (n / 10000L) % 1000L;
+    long last   = n % 10000L;
+    char buf[20];
+    sprintf(buf, "%03ld-%03ld-%04ld", area, middle, last);
+    return string(buf);
+}
 
-void Phone::set_contact(){
-    // TODO: Complete this method
-    // Use the same prompts as given!
-	cout <<"Enter the type of phone number: ";
-    getline(cin, type);
-	cout << "Enter the phone number: ";
+Phone::Phone(string type, string phone_number) {
+    // It is possible that num includes "-" or not, manage it!
+    // Note: We don't want to use C++11! stol is not valid!
+    this->type      = type;
+    this->phone_num = parsePhoneNumber(phone_number);
+}
+
+void Phone::set_contact() {
     string num;
+    cout << "Enter the type of phone number: ";
+    getline(cin, type);
+    cout << "Enter the phone number: ";
     getline(cin, num);
-    long long result = 0;
-    for (size_t i = 0; i < num.length(); ++i){
-        if (num[i] >= '0' && num[i] <= '9'){
-            result = result * 10 + (num[i] - '0');
-        }
-    }
-
+    phone_num = parsePhoneNumber(num);
 }
 
-
-string Phone::get_contact(string style){
-    // TODO: Complete this method, get hint from Email 
-    string num_str = "";
-    long long temp = phone_num;
-    if (temp == 0) num_str = "0000000000";
-    while (temp > 0){
-        num_str = (char)('0' + (temp % 10)) + num_str;
-        temp /= 10;
-    }
-    while (num_str.length() < 10){
-        num_str = "0" + num_str;
-    }
-
-    string formatted = num_str.substr(0, 3) + "-" + num_str.substr(3,3) +  "=" + num_str.substr(6, 4);
-
-    if (style == "full"){
-        return "(" + type + ")" + formatted;
-    
-    }
-    else 
-        return formatted;
+string Phone::get_contact(string style) {
+    if (style == "full")
+        return "(" + type + ") " + formatPhoneNumber(phone_num);
+    else
+        return formatPhoneNumber(phone_num);
 }
 
-
-void Phone::print(){
-    // Note: get_contact is called with default argument
-	cout << "Phone " << get_contact() << endl;
+void Phone::print() {
+    cout << "Phone (" << type << "): " << formatPhoneNumber(phone_num) << endl;
 }
-

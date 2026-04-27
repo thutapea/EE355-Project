@@ -1,16 +1,13 @@
-
 #ifndef CONTACT_H
 #define CONTACT_H
 
 #include <iostream>
 #include <string>
-#include <cstdio>
-#include <cstdlib>
+
 using namespace std;
 
-
 class Contact {
-protected:
+protected: // Changed to protected so subclasses can access it
     string type;
 public:
     virtual void print() = 0;
@@ -18,8 +15,7 @@ public:
     virtual void set_contact() = 0;
 };
 
-
-class Email: public Contact{
+class Email: public Contact {
 private:
     string email_addr;
 public:
@@ -29,10 +25,9 @@ public:
     void set_contact();
 };
 
-
-class Phone: public Contact{
+class Phone: public Contact {
 private:
-    long phone_num;
+    string phone_num; // String safely stores 10 digits without overflow
 public:
     Phone(string type, string phone_number);
     void print();
