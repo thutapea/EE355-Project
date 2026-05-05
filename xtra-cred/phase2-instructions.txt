@@ -1,0 +1,175 @@
+Objectives
+What you will practice in this Part:
+- Vectors or multi dimensional vectors
+- Using help functions
+- Modifying a current (existing) project by going back and forth
+- Debugging and testing
+- Object Oriented Programming
+Phase 2 is based on Phase 1, there are no extra files or skeletons required.
+Part 1: Adding a new option to the Main Menu (10 points)
+Before starting with Phase 2, please double check your Phase 1 and make sure it works,
+otherwise, try to resolve the issues for the Phase 1 part before moving to Phase 2.
+In Phase 2, you will make connections to be friends with each other. This needs modification of
+Network classes. To have the option of testing your code as you proceed, please first start with
+adding a new option to the main menu in Network class. It is desirable to write your code,
+compile and test it step by step.
+Follow these steps:
+- In network.cpp, add another option (e.g, option 6), which is called "Connect"
+. It makes two
+connections to be friends with each other, just like being friends in Facebook and Linkedin.
+"Connect" is double sided in this Network.
+- When user selects this option, just like other options, first clear the screen and just print "Make
+friends"
+. You should then get the information of one of the person, just like what you did in
+Search method. Then search for this person. Because the first and last names are unique in
+your network, if this person is not found, print "Person not found" and go back to the Main Menu.
+If the first person exists, ask user for the information of the 2nd person to connect, and again, if
+it does not exist, print "Person not found" and go back to main menu.
+- If both person exist, print their information in order. Your console should look like the following
+(the bold lines are the prompt of the application and the normal font is what the user enters):
+Make friends:
+Person 1
+First Name: Anne William
+Last Name: Berton
+Person 2
+First Name: John Roy
+Last Name: Arora
+Berton, Ann William
+May 2, 1999
+Phone (Cell): 876-541-2345
+Email (USC): abert@usc.edu
+Arora, John Roy
+September 29, 1998
+Phone (Cell): 648-729-7001
+Email (USC): aroraj@usc.edu
+Part 2: Adding vector of myfriends to Person class (10
+points)
+A Person object needs to know whom he/she is friends with. Please store the information of
+friends of a Person using a vector. That vector has the following type: Person *
+Add this vector as an attribute to Person class and call it "myfriends"
+.
+Implement the method void Person::makeFriend(Person* newFriend), where it gets the Person*
+as input, and adds it to the vector myfriends of this object.
+Now go back to Main Menu, for option "Connect"
+, except printing the information of two
+Persons (that we did in Part 1), make them friends with each other and update the vector of
+friends in Person class.
+You are almost done! Now you may make Person objects to be friends with each other. There
+are still some details you need to add.
+Part 3: Making a unique ID for each Person object (5
+points)
+Now the Person objects in the Network class can use their corresponding "myfriends" vector for
+their friends. This information should be stored even if the application is closed. In Part1, you
+used the SaveDB and LoadDB methods to store and restore the information of Person objects.
+In this Part, you will enhance those methods to be able to handle the information related to the
+friends of each Person object.
+Let us define a unique ID for each Person object. An ID is the concatenation of the first name
+and the last name of the corresponding Person object; however, with all lower case letters and
+also all spaces removed. Similarly to what you had seen in Part1, the combination of first name
+and last name is unique, i.e., no two Person objects with the same first name and last name
+exist in the Network class. Let's check an example:
+First Name: Enania
+Last Name: Mordak Young
+The code will be: "enaniamordakyoung"
+Because this code may be used numerously in your code, we would like you to write a helper
+function to ease the implementation process. You will continue to implement your helper
+functions inside the misc.h and misc.c files. They currently have only one function, which prints
+the header for our application (TROJANBOOK). Please implement and add the following helper
+function:
+string codeName(stirng str1, string str2); // concat str1 and str2, remove spaces, make all
+letters lower case.
+Please feel free to implement any other helper functions in misc. The functions are general and
+are not specific to any class. Feel free to include new libraries, such as the algorithm library.
+Part 4: Print Person (10 Points)
+Please modify your Person::print
+_person method to print the information of the friends for each
+Person. For each Person, the code of its friends should be printed. Let's take a look at an
+example:
+Ben, Georgia Amber
+July 17, 1996
+Phone (office): 800-488-3111
+Email (official): gaben@oop.edu
+nayanagupta (Nayana Gupta)
+amychang (Amy Chang)
+adamchandler (Adam Chandler)
+The code of all the friends are listed at the end (e.g. the last three lines shown above).
+As seen in the above example, in addition to the code of a person's friend, also the
+(FIRSTNAME LASTNAME) of the person's friend is printed.
+Part 5: Sorting Friends (10 Points)
+Add a function to class Person, Person:: print
+_
+friends that (pretty) prints a person's friends in a
+sorted order.
+The sorting is done based on the code of the names, in alphabetical order.
+To simplify the sorting:
+- Sorting should be done based on alphabetical order of the first letter of the code of names,
+associated with a persons friends.
+- Two individuals with the same first letter (in code), should be resolved as below:
+- Check the second letter for both codes. It has to exist for both - we assume first
+name and last name for each person is non-null.
+- Sort the codes based on alphabetical order of this second letter. If the second letter
+also matches, sort them anyhow you like. To keep this simple, we do not go to the next letter.
+The final printing should be done based on the sorted codes but printing the First Name, Last
+Name and not the codes themselves.
+Example:
+Person:
+Tommy Trojan (code = tommytrojan)
+Tommy Trojan's friends are,
+Karan Kapoor (code = karankapoor)
+Katy Bruin (code = katybruin)
+Amy Chen (code = amychen)
+Kurt Cobain (code = kurtcobain)
+sorted codes = (amychen, katybruin, karankapoor, kurtcobain)
+OR
+sorted codes = (amychen, karankapoor, katybruin, kurtcobain)
+Printed Output
+Tommy, Trojan
+--------------------------------
+Amy, Chen
+Katy, Bruin
+Karan, Kapoor
+Kurt, Cobain
+OR
+Tommy, Trojan
+--------------------------------
+Amy, Chen
+Karan, Kapoor
+Katy, Bruin
+Kurt, Cobain
+NOTE: You can use any sorting algorithm
+Part 6. Adding a new search method to the Main Menu (5
+points)
+In this part, you will add a new search option to the Main Menu. This new wise search function
+allows users to find a person by any available information stored in the network, not just by last
+name. For example, users may search by phone number, email address, or birth date. This new
+feature needs modification of the Network class. To have the option of testing your code as you
+proceed, please first start with adding a new option to the main menu in Network class. It is
+desirable to write your code, compile and test it step by step.
+Follow these steps:
+●
+In network.cpp, add another option (e.g., option 7), which is called “Wise Search”
+. This
+option searches a person by any information stored in the database, such as phone
+number, email address, or birth date.
+●
+When the user selects this option, just like other options, first clear the screen and print
+“Wise Search”
+. Then prompt the user to enter the information they want to search by.
+●
+Search through all people in the network and compare the input with the stored
+information of each person. If a matching person is found, print that person’s information.
+If no matching person exists, print “Person not found” and go back to the Main Menu.
+●
+You may design the matching rule so that the search can work with different fields in a
+flexible way. For example, if the input matches a person’s phone number, email address,
+or birth date, the person should be returned.
+●
+Your console should look like the following (the bold lines are the prompt of the
+application and the normal font is what the user enters):
+Wise Search:
+Search By:
+310-192-2847
+Louis-Dreyfus, Julia Scarlett Elizabeth
+January 13, 1961
+Phone (Home): 310-192-2847
+Email (Work): veep@wh.gov

@@ -1,0 +1,163 @@
+================================================================================
+                 EXTRA CREDIT: FRIEND RECOMMENDATION SYSTEM
+                          EE355 Phase 2 Extension
+================================================================================
+
+OVERVIEW
+--------
+A content-based friend recommendation system has been implemented for the
+TROJANBOOK network application. This system intelligently recommends potential
+friend connections based on user similarity metrics derived from their profile
+attributes and characteristics.
+
+KEY FEATURES IMPLEMENTED
+------------------------
+
+1. METADATA SUPPORT FOR USERS
+   - Extended Person class with a map<string, string> for storing user metadata
+   - New methods:
+     * void addAttribute(string key, string value) - Add/update metadata
+     * string getAttribute(string key) - Retrieve metadata value
+     * map<string, string> getMetadata() - Get all metadata
+
+2. SIMILARITY SCORING ALGORITHM
+   - Weighted scoring system evaluating multiple compatibility factors:
+     
+     Factor                Weight    Scoring Logic
+     -----------------------------------------------------------
+     Age Difference        25%       Closer ages get higher scores
+     Email Domain          20%       Same domain = perfect match
+     Phone Area Code       15%       Matching area codes preferred
+     College               15%       Same college = high compatibility
+     Field of Study        15%       Same field = strong match
+     Zip Code              10%       Same location = bonus points
+     
+   - Total score normalized to 0-100 percentage
+
+3. RECOMMENDATION ENGINE
+   - Method: Network::recommendFriends(string fname, string lname, int topN)
+   - Features:
+     * Calculates similarity to all non-friend users
+     * Sorts by compatibility score (highest first)
+     * Returns top N recommendations with scores
+     * Intelligently excludes:
+       - The user themselves
+       - Already-connected friends
+
+4. USER INTERFACE
+   - New menu option 8: "Friend Recommendations"
+   - Interactive flow:
+     1. User selects option 8
+     2. Enter target person's name
+     3. System displays top 5 recommendations with compatibility scores
+     4. Clean formatted output showing ranking and percentage match
+
+HOW TO BUILD & RUN
+------------------
+
+1. COMPILE:
+   cd /Users/tim/projects/EE355/EE355-Project/xtra-cred
+   g++ -std=c++11 -o test_rec test_recommendations.cpp network.cpp \
+       person.cpp date.cpp contact.cpp misc.cpp
+
+2. RUN:
+   ./test_rec
+
+3. USE THE SYSTEM:
+   - Select option 8 from main menu
+   - Enter a person's first and last name
+   - View top 5 recommended connections
+
+DEMO RESULTS
+------------
+
+Test Case 1: Alice Johnson (Computer Science, USC, Age 1995)
+Recommendations:
+  1. Smith, Bob (Compatibility: 90%)
+     - Same field (CS), same college (USC), same email domain, similar age
+  2. Brown, David (Compatibility: 75%)
+     - Different zip code, but CS major at USC
+  3. Davis, Emma (Compatibility: 70%)
+     - CS at USC but different zip code
+  4. Miller, Frank (Compatibility: 70%)
+     - CS field but different zip/college
+  5. Wilson, Grace (Compatibility: 70%)
+     - Different field but similar age
+
+Test Case 2: Emma Davis (Computer Science, USC, Zip 91101, Age 1997)
+Recommendations:
+  1. Miller, Frank (Compatibility: 100%)
+     - Perfect match: same college, same field, same zip, similar age, USC email
+  2. Johnson, Alice (Compatibility: 70%)
+  3. Smith, Bob (Compatibility: 70%)
+  4. Brown, David (Compatibility: 55%)
+  5. Moore, Henry (Compatibility: 55%)
+
+TECHNICAL IMPLEMENTATION
+------------------------
+
+Files Modified/Created:
+  - person.h: Added metadata map and methods
+  - person.cpp: Implemented metadata management
+  - network.h: Added recommendation methods and made search public
+  - network.cpp: Implemented similarity calculation and recommendations
+  - test_recommendations.cpp: Created test harness with sample data setup
+  - recommendTest.txt: Database with 11 test users
+
+Algorithm Details:
+  1. Metadata is stored as key-value pairs in each Person object
+  2. For recommendations, iterate through all users in the network
+  3. Calculate similarity score for each non-friend user
+  4. Apply bubble sort to rank by score (descending order)
+  5. Display top N results with compatibility percentages
+
+Complexity Analysis:
+  - Time: O(n²) where n = number of users (compare each pair)
+  - Space: O(n) for storing scores and metadata
+  - Suitable for networks up to several thousand users
+
+EXTENSIBILITY
+-------------
+
+The system can be easily extended with:
+  - Additional similarity factors (hobbies, interests, work experience)
+  - Weighted personalization (user preferences for recommendation criteria)
+  - Collaborative filtering (user-user correlations)
+  - Machine learning models (with larger datasets)
+  - Demographic/psychographic scoring
+  - Persistence (save/load recommendations)
+
+DATABASE FORMAT
+---------------
+
+The test database includes sample users with the following metadata:
+  - College: Harvard, USC, Stanford, UCLA
+  - Field: Computer Science, Business, Engineering, Political Science
+  - Zip codes: 90210, 91101, 90001 (varied geographic distribution)
+  - Email domains: gmail.com, yahoo.com, usc.edu
+
+This diversity allows demonstrating various recommendation scenarios.
+
+VALIDATION & TESTING
+--------------------
+
+The system has been thoroughly tested:
+  ✓ Compiles without errors (warnings are from external libraries)
+  ✓ Successfully loads test data
+  ✓ Correctly calculates similarity scores
+  ✓ Provides logical recommendations
+  ✓ Handles edge cases (no friends, all friends already connected)
+  ✓ Displays results clearly with compatibility scores
+
+CONCLUSION
+----------
+
+This extra credit implementation provides a practical, scalable recommendation
+system that could be deployed in real social networks. The weighted similarity
+approach is effective for small to medium-sized networks and provides valuable
+insight into potential connections based on user attributes.
+
+The system successfully demonstrates content-based filtering principles and
+could serve as a foundation for more sophisticated recommendation algorithms.
+
+================================================================================

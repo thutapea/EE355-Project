@@ -1,0 +1,66 @@
+Julia Scarlett Elizabeth
+Louis-Dreyfus
+1/13/1961
+(Gmail) something@email.com
+(Office) 310-291-7482
+--------------------
+Martin
+Van Nostrand
+07/24/1949
+(Yahoo) myemail@yahoo.com
+(Home) 2244325809
+--------------------
+Truman
+Burbank
+1/17/1962
+(Official) document@info.edu
+(Work) 2135179989
+--------------------
+Alice
+Johnson
+5/20/1995
+(Gmail) alice.johnson@gmail.com
+(Cell) 213-456-7890
+--------------------
+Bob
+Smith
+6/15/1996
+(Gmail) bob.smith@gmail.com
+(Cell) 213-789-0123
+--------------------
+Carol
+Williams
+7/22/1994
+(Yahoo) carol.w@yahoo.com
+(Cell) 310-111-2222
+--------------------
+David
+Brown
+8/10/1995
+(Gmail) d.brown@gmail.com
+(Cell) 213-555-6666
+--------------------
+Emma
+Davis
+3/05/1997
+(USC) emma.d@usc.edu
+(Cell) 626-777-8888
+--------------------
+Frank
+Miller
+2/14/1998
+(USC) frank.m@usc.edu
+(Cell) 626-999-0000
+--------------------
+Grace
+Wilson
+9/30/1996
+(Gmail) grace.w@gmail.com
+(Cell) 310-222-3333
+--------------------
+Henry
+Moore
+11/11/1994
+(Yahoo) henry.m@yahoo.com
+(Cell) 213-444-5555
+--------------------
