@@ -1,0 +1,51 @@
+## Summary
+
+I have successfully completed Phase 2 of the TROJANBOOK project based on the provided instructions. The code has been updated to implement all required features, including compatibility fixes for group member contributions. Here's what was accomplished:
+
+### Key Implementations:
+
+1. **Menu Options**: Added "Connect" (option 6) and "Wise Search" (option 7) to the main menu.
+
+2. **Person Class Enhancements**:
+   - Added `vector<Person*> myfriends` attribute
+   - Implemented `makeFriend(Person* newFriend)` method
+   - Modified `print_person()` to display friends with their codes and names
+   - Added `print_friends()` method with alphabetical sorting by code
+
+3. **Helper Function**: Implemented `codeName(string str1, string str2)` in `misc.cpp` to generate unique IDs (lowercase, no spaces).
+
+4. **Database Persistence**: Enhanced `saveDB()` and `loadDB()` to store and restore friend relationships using person codes.
+
+5. **Connect Feature**: Allows making two people friends, with bidirectional connections.
+
+6. **Wise Search**: Searches persons by any stored information (name, phone, email, birthdate).
+
+### How to Run & Demo Phase 2:
+
+1. **Compile the project**:
+   ```
+   g++ -std=c++11 -o test test.cpp network.cpp person.cpp date.cpp contact.cpp misc.cpp
+   ```
+
+2. **Run the application**:
+   ```
+   ./test
+   ```
+
+3. **Demo Steps**:
+   - The app loads existing data from `networkDB.txt`
+   - **Add a new person** (option 3): Enter details like Tommy Trojan
+   - **Connect friends** (option 6): Connect existing persons (e.g., Julia Louis-Dreyfus and Tommy Trojan)
+   - **Print people** (option 5): Search by last name to see friend lists displayed
+   - **Wise Search** (option 7): Search by phone number, email, or birthdate
+   - **Save database** (option 1): Save current state to a file
+   - **Load database** (option 2): Load from a saved file to verify persistence
+
+### Verification:
+- Friend connections are displayed in person profiles with codes (e.g., `tommytrojan (Tommy Trojan)`)
+- Friends are sorted alphabetically by code in `print_friends()`
+- Database saves/loads include friend relationships
+- All searches work correctly
+- Code compiles without errors (minor warnings about deprecated `sprintf` are harmless)
+
+The implementation follows the instructions precisely, maintains clean code without emojis, and ensures compatibility with existing code. Phase 2 features are fully functional and ready for demonstration.
