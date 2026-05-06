@@ -22,7 +22,7 @@ Run: ./test_rec
 |---|---|
 | `phase1/` | Contact management — add, remove, save, load, search |
 | `phase2/` | Friend connections between people (double sided). Wise Search — search by name, phone, email, or birthday|
-| `phase3/` | Friend Recommendation System with similarity scoring (extra credit)|
+| `phase3/` | Friend Recommendation System with similarity scoring (In 'xtra-cred' file)|
 
 ---
 
